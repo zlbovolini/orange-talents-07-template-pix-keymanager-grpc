@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "RegistraChavePixGrpc";
+option objc_class_prefix = "HLW";
+
+package com.github.zlbovolini.keymanager.grpc;
+
+service RegistraChavePixService {
+  rpc registra (RegistraChavePixRequest) returns (RegistraChavePixResponse) {}
+}
+
+message RegistraChavePixRequest {
+  string clienteId           = 1;
+  TipoChaveRequest tipoChave = 2;
+  string chave               = 3;
+  TipoContaRequest tipoConta = 4;
+}
+
+enum TipoChaveRequest {
+  CHAVE_DESCONHECIDA = 0;
+  CPF = 1;
+  CELULAR = 2;
+  EMAIL = 3;
+  ALEATORIA = 4;
+}
+
+enum TipoContaRequest {
+  CONTA_DESCONHECIDA = 0;
+  CONTA_CORRENTE = 1;
+  CONTA_POUPANCA = 2;
+}
+
+message RegistraChavePixResponse {
+  string pixId = 1;
+}

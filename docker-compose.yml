@@ -1,0 +1,24 @@
+version: '3'
+services:
+  bcb:
+    image: "public.ecr.aws/d8b2x5c9/orange-stack-sat-bcb-pix"
+    ports:
+      - 8082:8082
+  erp-itau:
+    image: "public.ecr.aws/d8b2x5c9/orange-stack-sat-itau-erp"
+    ports:
+      - 9091:9091
+
+  postgres:
+    image: postgres:13.4-alpine
+    environment:
+      POSTGRES_USER: zup
+      POSTGRES_PASSWORD: zup
+      POSTGRES_DB: key_manager
+    ports:
+      - '5123:5432'
+    volumes:
+      - key-manager-volume:/var/lib/postgresql/data
+
+volumes:
+  key-manager-volume:

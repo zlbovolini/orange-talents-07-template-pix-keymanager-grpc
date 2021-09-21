@@ -1,3 +1,24 @@
 micronaut:
   application:
-    name: keymanagerGrpc
+    name: 'Key Manager Grpc'
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5123/key_manager
+    driverClassName: org.postgresql.Driver
+    username: ${APP_DB_USERNAME:zup}
+    password: ${APP_DB_PASSWORD:zup}
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        hbm2ddl:
+          auto: update
+
+
+itau-erp.url: ${ITAU_ERP_URL:`http://localhost:9091/`}
