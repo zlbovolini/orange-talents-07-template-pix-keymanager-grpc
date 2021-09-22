@@ -1,5 +1,6 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.validacao.ClienteItau
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
@@ -8,6 +9,7 @@ import javax.validation.constraints.Size
 @Introspected
 data class NovaChavePix(
     @field:NotBlank
+    @field:ClienteItau
     val clienteId: String,
 
     @field:NotNull
