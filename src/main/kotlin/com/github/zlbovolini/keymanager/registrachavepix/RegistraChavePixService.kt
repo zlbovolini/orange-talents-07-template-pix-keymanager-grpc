@@ -1,7 +1,6 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
 import com.github.zlbovolini.keymanager.comum.grpc.ErrorHandler
-import com.github.zlbovolini.keymanager.comum.grpc.toNovaChave
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixResponse
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixServiceGrpc

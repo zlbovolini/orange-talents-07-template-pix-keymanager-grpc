@@ -1,10 +1,9 @@
-package com.github.zlbovolini.keymanager.comum.grpc
+package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.TipoChave
+import com.github.zlbovolini.keymanager.comum.TipoConta
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.TipoChaveRequest
-import com.github.zlbovolini.keymanager.registrachavepix.NovaChavePix
-import com.github.zlbovolini.keymanager.registrachavepix.TipoChave
-import com.github.zlbovolini.keymanager.registrachavepix.TipoConta
 import java.util.*
 
 fun RegistraChavePixRequest.toNovaChave(): NovaChavePix {

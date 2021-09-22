@@ -1,6 +1,6 @@
 package com.github.zlbovolini.keymanager.comum.validacao
 
-import com.github.zlbovolini.keymanager.registrachavepix.Chave
+import com.github.zlbovolini.keymanager.comum.Chave
 import io.micronaut.core.annotation.AnnotationValue
 import io.micronaut.validation.validator.constraints.ConstraintValidator
 import io.micronaut.validation.validator.constraints.ConstraintValidatorContext
@@ -20,6 +20,6 @@ class ChavePixValidator : ConstraintValidator<Pix, Chave> {
             return false
         }
 
-        return chave.tipo.valida(chave.valor)
+        return chave.tipoChave.valida(chave.valor)
     }
 }

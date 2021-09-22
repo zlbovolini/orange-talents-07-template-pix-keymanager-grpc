@@ -1,5 +1,7 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.ChavePixRepository
+import com.github.zlbovolini.keymanager.comum.TipoConta
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixServiceGrpc

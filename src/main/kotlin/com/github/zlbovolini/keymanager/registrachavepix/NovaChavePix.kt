@@ -1,5 +1,6 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.*
 import com.github.zlbovolini.keymanager.comum.validacao.ClienteItau
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.NotBlank

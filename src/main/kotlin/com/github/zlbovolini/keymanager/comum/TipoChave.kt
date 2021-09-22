@@ -1,4 +1,4 @@
-package com.github.zlbovolini.keymanager.registrachavepix
+package com.github.zlbovolini.keymanager.comum
 
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator

@@ -1,4 +1,4 @@
-package com.github.zlbovolini.keymanager.registrachavepix
+package com.github.zlbovolini.keymanager.comum
 
 import com.github.zlbovolini.keymanager.comum.itau.ContaItau
 import com.github.zlbovolini.keymanager.comum.validacao.Pix
@@ -18,7 +18,8 @@ class ChavePix(
     @Valid
     @field:NotNull
     @ContaItau
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.PERSIST])
+    @Embedded
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.PERSIST])
     val conta: Conta
 ) {
 
@@ -27,4 +28,8 @@ class ChavePix(
     val id: Long? = null
 
     val uuid = UUID.randomUUID().toString()
+
+    fun isDono(clienteId: String): Boolean {
+        return conta.isDono(clienteId)
+    }
 }

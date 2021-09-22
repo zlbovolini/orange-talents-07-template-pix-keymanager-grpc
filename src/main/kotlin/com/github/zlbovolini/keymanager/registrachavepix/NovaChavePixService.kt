@@ -1,5 +1,7 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.ChavePix
+import com.github.zlbovolini.keymanager.comum.ChavePixRepository
 import com.github.zlbovolini.keymanager.comum.exception.ChavePixJaExistenteException
 import com.github.zlbovolini.keymanager.comum.validacao.UnicoValidator
 import io.micronaut.validation.Validated

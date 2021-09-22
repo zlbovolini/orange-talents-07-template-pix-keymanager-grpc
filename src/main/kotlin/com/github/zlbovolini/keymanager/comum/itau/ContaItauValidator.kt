@@ -1,6 +1,6 @@
 package com.github.zlbovolini.keymanager.comum.itau
 
-import com.github.zlbovolini.keymanager.registrachavepix.Conta
+import com.github.zlbovolini.keymanager.comum.Conta
 import io.micronaut.core.annotation.AnnotationValue
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.exceptions.HttpClientResponseException
@@ -24,7 +24,7 @@ open class ContaItauValidator(
 
         with(conta) {
             val response = try {
-                consultaContaHttpClient.porClienteTipoConta(clienteId, tipo)
+                consultaContaHttpClient.porClienteTipoConta(clienteId, tipoConta)
             } catch (e: HttpClientResponseException) {
                 return false
             }

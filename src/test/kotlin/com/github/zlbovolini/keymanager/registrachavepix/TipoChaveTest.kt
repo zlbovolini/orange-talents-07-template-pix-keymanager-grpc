@@ -1,5 +1,6 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
+import com.github.zlbovolini.keymanager.comum.TipoChave
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested

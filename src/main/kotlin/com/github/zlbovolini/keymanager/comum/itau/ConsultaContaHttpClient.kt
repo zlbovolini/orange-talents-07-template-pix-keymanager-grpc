@@ -1,6 +1,6 @@
 package com.github.zlbovolini.keymanager.comum.itau
 
-import com.github.zlbovolini.keymanager.registrachavepix.TipoConta
+import com.github.zlbovolini.keymanager.comum.TipoConta
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
