@@ -1,22 +1,27 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
 import com.github.zlbovolini.keymanager.comum.exception.ChavePixJaExistenteException
-import com.github.zlbovolini.keymanager.comum.itau.ConsultaClienteHttpClient
-import com.github.zlbovolini.keymanager.comum.validacao.ClienteItauValidator
+import com.github.zlbovolini.keymanager.comum.validacao.UnicoValidator
 import io.micronaut.validation.Validated
 import jakarta.inject.Singleton
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
+import javax.transaction.Transactional
 import javax.validation.Valid
 
 @Singleton
 @Validated
 class NovaChavePixService(
+    @PersistenceContext
+    private val entityManager: EntityManager,
     private val pixRepository: ChavePixRepository,
-    private val consultaClienteHttpClient: ConsultaClienteHttpClient
+    //private val consultaClienteHttpClient: ConsultaClienteHttpClient
 ) {
 
+    @Transactional
     fun registra(@Valid novaChavePix: NovaChavePix): ChavePix {
 
-        if (pixRepository.existsByChaveValor(novaChavePix.chave)) {
+        if (!isChaveUnica(novaChavePix.chave)) {
             throw ChavePixJaExistenteException("Chave já registrada");
         }
 
@@ -24,10 +29,15 @@ class NovaChavePixService(
         return pixRepository.save(chavePix)
     }
 
-
-    private fun isClienteItau(clienteId: String): Boolean {
-        return ClienteItauValidator(consultaClienteHttpClient).run {
-            isValid(clienteId, null, null)
+    private fun isChaveUnica(valor: String): Boolean {
+        return UnicoValidator(entityManager).run {
+            isValid(valor, null, null)
         }
     }
+
+//    private fun isClienteItau(clienteId: String): Boolean {
+//        return ClienteItauValidator(consultaClienteHttpClient).run {
+//            isValid(clienteId, null, null)
+//        }
+//    }
 }
