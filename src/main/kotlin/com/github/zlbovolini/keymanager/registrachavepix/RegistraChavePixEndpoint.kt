@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 @Validated
-class RegistraChavePixService(
+class RegistraChavePixEndpoint(
     private val novaChavePixService: NovaChavePixService,
     private val registraChavePixBCBService: RegistraChavePixBCBService
 ) :

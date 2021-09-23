@@ -27,7 +27,7 @@ import org.mockito.Mockito
 import java.util.*
 
 @MicronautTest(transactional = false)
-internal class RegistraChavePixServiceTest(
+internal class RegistraChavePixEndpointTest(
     private val grpcClient: RegistraChavePixServiceGrpc.RegistraChavePixServiceBlockingStub,
     private val pixRepository: ChavePixRepository
 ) {
