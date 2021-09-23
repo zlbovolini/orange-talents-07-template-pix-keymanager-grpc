@@ -50,10 +50,10 @@ internal class RemoveChavePixServiceTest(
 
         // Ponte
         Mockito.`when`(consultaClienteHttpClient.porId(ponteClienteId))
-            .thenReturn(HttpResponse.ok(dadosClienteResponse()))
+            .thenReturn(HttpResponse.ok(dadosPonteClienteResponse()))
 
         Mockito.`when`(consultaContaHttpClient.porClienteTipoConta(ponteClienteId, TipoConta.CONTA_CORRENTE))
-            .thenReturn(HttpResponse.ok(dadosContaResponse()))
+            .thenReturn(HttpResponse.ok(dadosPonteContaResponse()))
 
         // Yuri
         Mockito.`when`(consultaClienteHttpClient.porId(yuriClienteId))
@@ -117,7 +117,7 @@ internal class RemoveChavePixServiceTest(
         }
     }
 
-    private fun dadosClienteResponse(): ClienteResponse {
+    private fun dadosPonteClienteResponse(): ClienteResponse {
         val instituicaoResponse = InstituicaoResponse("ITAÚ UNIBANCO S.A.", "60701190")
 
         return ClienteResponse(
@@ -139,7 +139,7 @@ internal class RemoveChavePixServiceTest(
         )
     }
 
-    private fun dadosContaResponse(): ContaResponse {
+    private fun dadosPonteContaResponse(): ContaResponse {
         val instituicaoResponse = InstituicaoResponse("ITAÚ UNIBANCO S.A.", "60701190")
         val titularResponse = TitularResponse(ponteClienteId, "Rafael M C Ponte", "02467781054")
 
