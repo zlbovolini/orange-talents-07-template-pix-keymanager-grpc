@@ -8,6 +8,6 @@ data class RemoveChavePix(
     @field:NotBlank
     val chaveId: String,
 
-    @NotBlank
+    @field:NotBlank
     val clienteId: String,
 )
