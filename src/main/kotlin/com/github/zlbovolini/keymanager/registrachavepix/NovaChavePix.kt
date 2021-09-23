@@ -1,6 +1,7 @@
 package com.github.zlbovolini.keymanager.registrachavepix
 
 import com.github.zlbovolini.keymanager.comum.*
+import com.github.zlbovolini.keymanager.comum.itau.ContaResponse
 import com.github.zlbovolini.keymanager.comum.validacao.ClienteItau
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.NotBlank
@@ -23,10 +24,15 @@ data class NovaChavePix(
     @field:NotBlank
     val tipoConta: TipoConta
 ) {
-    fun toModel(): ChavePix {
+    fun toModel(contaResponse: ContaResponse): ChavePix {
         val chave = Chave(tipoChave, chave)
-        val conta = Conta(tipoConta, clienteId)
+        val conta = Conta(
+            tipoConta = tipoConta,
+            agencia = contaResponse.agencia,
+            numero = contaResponse.numero
+        )
+        val titular = contaResponse.titular.toTitular()
 
-        return ChavePix(chave, conta)
+        return ChavePix(chave, conta, titular)
     }
 }

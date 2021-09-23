@@ -2,6 +2,7 @@ package com.github.zlbovolini.keymanager.registrachavepix
 
 import com.github.zlbovolini.keymanager.comum.ChavePixRepository
 import com.github.zlbovolini.keymanager.comum.TipoConta
+import com.github.zlbovolini.keymanager.comum.bancocentral.BancoCentralPixClient
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixServiceGrpc
@@ -38,6 +39,9 @@ internal class RegistraChavePixServiceTest(
 
     @Inject
     private lateinit var consultaContaHttpClient: ConsultaContaHttpClient
+
+    @Inject
+    private lateinit var bancoCentralPixClient: BancoCentralPixClient
 
     private lateinit var request: RegistraChavePixRequest
 
@@ -141,6 +145,11 @@ internal class RegistraChavePixServiceTest(
     @MockBean(ConsultaContaHttpClient::class)
     fun consultaContaHttpClient(): ConsultaContaHttpClient {
         return Mockito.mock(ConsultaContaHttpClient::class.java)
+    }
+
+    @MockBean(BancoCentralPixClient::class)
+    fun bancoCentralPixClient(): BancoCentralPixClient {
+        return Mockito.mock(BancoCentralPixClient::class.java)
     }
 
     @Factory

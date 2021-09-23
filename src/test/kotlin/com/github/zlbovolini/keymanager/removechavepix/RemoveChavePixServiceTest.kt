@@ -1,6 +1,7 @@
 package com.github.zlbovolini.keymanager.removechavepix
 
 import com.github.zlbovolini.keymanager.comum.*
+import com.github.zlbovolini.keymanager.comum.bancocentral.BancoCentralPixClient
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RemoveChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RemoveChavePixServiceGrpc
@@ -30,19 +31,24 @@ internal class RemoveChavePixServiceTest(
 
     private val ponteClienteId = UUID.randomUUID().toString()
     private val ponteChave = Chave(TipoChave.CPF, "02467781054")
-    private val ponteConta = Conta(TipoConta.CONTA_CORRENTE, ponteClienteId)
-    private val ponteChavePix = ChavePix(ponteChave, ponteConta)
+    private val ponteConta = Conta(TipoConta.CONTA_CORRENTE, "0001", "291900")
+    private val ponteTitular = Titular(ponteClienteId, "Ponte", "02467781054")
+    private val ponteChavePix = ChavePix(ponteChave, ponteConta, ponteTitular)
 
     private val yuriClienteId = UUID.randomUUID().toString()
     private val yuriChave = Chave(TipoChave.CPF, "86135457004")
-    private val yuriConta = Conta(TipoConta.CONTA_POUPANCA, yuriClienteId)
-    private val yuriChavePix = ChavePix(yuriChave, yuriConta)
+    private val yuriConta = Conta(TipoConta.CONTA_POUPANCA, "0001", "123455")
+    private val yuriTitular = Titular(yuriClienteId, "Yuri", "86135457004")
+    private val yuriChavePix = ChavePix(yuriChave, yuriConta, yuriTitular)
 
     @Inject
     private lateinit var consultaClienteHttpClient: ConsultaClienteHttpClient
 
     @Inject
     private lateinit var consultaContaHttpClient: ConsultaContaHttpClient
+
+    @Inject
+    private lateinit var bancoCentralPixClient: BancoCentralPixClient
 
     @BeforeEach
     fun setUp() {
@@ -70,7 +76,7 @@ internal class RemoveChavePixServiceTest(
 
         val request = RemoveChavePixRequest.newBuilder()
             .setChaveId(ponteChavePix.uuid)
-            .setClienteId(ponteChavePix.conta.clienteId)
+            .setClienteId(ponteChavePix.titular.clienteId)
             .build()
 
         grpcClient.remove(request)
@@ -173,6 +179,11 @@ internal class RemoveChavePixServiceTest(
     @MockBean(ConsultaContaHttpClient::class)
     fun consultaContaHttpClient(): ConsultaContaHttpClient {
         return Mockito.mock(ConsultaContaHttpClient::class.java)
+    }
+
+    @MockBean(BancoCentralPixClient::class)
+    fun bancoCentralPixClient(): BancoCentralPixClient {
+        return Mockito.mock(BancoCentralPixClient::class.java)
     }
 
     @Factory

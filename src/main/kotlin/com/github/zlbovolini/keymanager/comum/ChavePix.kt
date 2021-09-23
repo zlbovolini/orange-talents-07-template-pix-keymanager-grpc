@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull
 class ChavePix(
 
     @Valid
+    @field:NotNull
     @Pix
     @Embedded
     val chave: Chave,
@@ -20,7 +21,12 @@ class ChavePix(
     @ContaItau
     @Embedded
     //@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.PERSIST])
-    val conta: Conta
+    val conta: Conta,
+
+    @Valid
+    @field:NotNull
+    @Embedded
+    val titular: Titular,
 ) {
 
     @Id
@@ -30,6 +36,6 @@ class ChavePix(
     val uuid = UUID.randomUUID().toString()
 
     fun isDono(clienteId: String): Boolean {
-        return conta.isDono(clienteId)
+        return titular.clienteId.uppercase() == clienteId.uppercase()
     }
 }

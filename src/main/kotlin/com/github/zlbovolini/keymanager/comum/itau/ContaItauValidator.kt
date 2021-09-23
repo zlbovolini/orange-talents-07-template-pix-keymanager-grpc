@@ -2,8 +2,6 @@ package com.github.zlbovolini.keymanager.comum.itau
 
 import com.github.zlbovolini.keymanager.comum.Conta
 import io.micronaut.core.annotation.AnnotationValue
-import io.micronaut.http.HttpStatus
-import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.validation.validator.constraints.ConstraintValidator
 import io.micronaut.validation.validator.constraints.ConstraintValidatorContext
 import jakarta.inject.Singleton
@@ -22,17 +20,17 @@ open class ContaItauValidator(
             return false
         }
 
-        with(conta) {
-            val response = try {
-                consultaContaHttpClient.porClienteTipoConta(clienteId, tipoConta)
-            } catch (e: HttpClientResponseException) {
-                return false
-            }
-
-            if (response.status().equals(HttpStatus.NOT_FOUND)) {
-                return false
-            }
-        }
+//        with(conta) {
+//            val response = try {
+//                consultaContaHttpClient.porClienteTipoConta(clienteId, tipoConta)
+//            } catch (e: HttpClientResponseException) {
+//                return false
+//            }
+//
+//            if (response.status().equals(HttpStatus.NOT_FOUND)) {
+//                return false
+//            }
+//        }
 
         return true
     }

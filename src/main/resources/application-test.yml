@@ -21,3 +21,4 @@ jpa:
           auto: update
 
 itau-erp.url: ${ITAU_ERP_URL:`http://localhost:9091/`}
+banco-central.url: ${BANCO_CENTRAL_URL:`http://localhost:8082/`}
