@@ -21,6 +21,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
+import org.mockito.Mockito.only
+import org.mockito.Mockito.verify
 import java.util.*
 
 @MicronautTest(transactional = false)
@@ -72,6 +74,9 @@ internal class RemoveChavePixServiceTest(
     @Test
     fun `deve remover chave pix cpf`() {
 
+        Mockito.`when`(bancoCentralPixClient.remove(ponteChave.valor))
+            .thenReturn(HttpResponse.ok())
+
         pixRepository.save(ponteChavePix)
 
         val request = RemoveChavePixRequest.newBuilder()
@@ -82,6 +87,7 @@ internal class RemoveChavePixServiceTest(
         grpcClient.remove(request)
 
         assertFalse(pixRepository.existsByChaveValor(ponteChavePix.chave.valor))
+        verify(bancoCentralPixClient, only()).remove("02467781054")
     }
 
     @Test
