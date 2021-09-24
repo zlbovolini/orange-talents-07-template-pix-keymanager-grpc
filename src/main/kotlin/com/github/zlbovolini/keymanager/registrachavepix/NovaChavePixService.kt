@@ -46,7 +46,7 @@ class NovaChavePixService(
             throw IllegalStateException("Erro ao registrar chave no Banco Central")
         }
 
-        chavePix.atualiza(bcbResponse.body()!!["chave"]!!)
+        chavePix.atualiza(bcbResponse.body()!!["key"]!!)
 
         return chavePix
     }
