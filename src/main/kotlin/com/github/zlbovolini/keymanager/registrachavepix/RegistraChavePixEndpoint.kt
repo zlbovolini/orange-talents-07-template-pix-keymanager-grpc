@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory
 @Singleton
 @Validated
 class RegistraChavePixEndpoint(
-    private val novaChavePixService: NovaChavePixService,
-    private val registraChavePixBCBService: RegistraChavePixBCBService
+    private val novaChavePixService: NovaChavePixService
 ) :
     RegistraChavePixServiceGrpc.RegistraChavePixServiceImplBase() {
 
@@ -26,8 +25,6 @@ class RegistraChavePixEndpoint(
     ) {
         val novaChavePix = request.toNovaChave()
         val chavePix = novaChavePixService.registra(novaChavePix)
-
-        registraChavePixBCBService.executa(chavePix)
 
         val response = RegistraChavePixResponse.newBuilder()
             .setPixId(chavePix.uuid)

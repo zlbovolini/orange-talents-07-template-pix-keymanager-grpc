@@ -17,5 +17,5 @@ class Chave(
     @field:NotBlank
     @field:Unico
     @Column(unique = true, nullable = false)
-    val valor: String,
+    var valor: String,
 )

@@ -38,4 +38,8 @@ class ChavePix(
     fun isDono(clienteId: String): Boolean {
         return titular.clienteId.uppercase() == clienteId.uppercase()
     }
+
+    fun atualiza(chave: String) {
+        this.chave.valor = chave
+    }
 }

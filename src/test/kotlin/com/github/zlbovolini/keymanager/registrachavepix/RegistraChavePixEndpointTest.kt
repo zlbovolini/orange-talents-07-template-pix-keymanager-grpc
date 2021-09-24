@@ -3,6 +3,7 @@ package com.github.zlbovolini.keymanager.registrachavepix
 import com.github.zlbovolini.keymanager.comum.ChavePixRepository
 import com.github.zlbovolini.keymanager.comum.TipoConta
 import com.github.zlbovolini.keymanager.comum.bancocentral.BancoCentralPixClient
+import com.github.zlbovolini.keymanager.comum.bancocentral.RegistraChavePixBCBRequest
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixServiceGrpc
@@ -66,6 +67,14 @@ internal class RegistraChavePixEndpointTest(
         Mockito.`when`(consultaContaHttpClient.porClienteTipoConta(clienteId, TipoConta.CONTA_CORRENTE))
             .thenReturn(HttpResponse.ok(dadosContaResponse()))
 
+        Mockito.`when`(
+            bancoCentralPixClient.registra(
+                RegistraChavePixBCBRequest.of(
+                    request.toNovaChave().toModel(dadosContaResponse())
+                )
+            )
+        ).thenReturn(HttpResponse.created(mapOf(Pair("chave", "02467781054"))))
+
         val response = grpcClient.registra(request)
 
         with(response) {
@@ -101,6 +110,14 @@ internal class RegistraChavePixEndpointTest(
 
         Mockito.`when`(consultaContaHttpClient.porClienteTipoConta(clienteId, TipoConta.CONTA_CORRENTE))
             .thenReturn(HttpResponse.ok(dadosContaResponse()))
+
+        Mockito.`when`(
+            bancoCentralPixClient.registra(
+                RegistraChavePixBCBRequest.of(
+                    request.toNovaChave().toModel(dadosContaResponse())
+                )
+            )
+        ).thenReturn(HttpResponse.created(mapOf(Pair("chave", "02467781054"))))
 
         grpcClient.registra(request)
         val error = assertThrows<StatusRuntimeException> {
