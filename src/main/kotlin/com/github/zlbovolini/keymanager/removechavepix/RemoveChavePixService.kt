@@ -6,6 +6,7 @@ import com.github.zlbovolini.keymanager.comum.bancocentral.BancoCentralPixClient
 import com.github.zlbovolini.keymanager.comum.bancocentral.RemoveChavePixBCBRequest
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
+import io.micronaut.http.HttpStatus
 import io.micronaut.validation.Validated
 import jakarta.inject.Singleton
 import jakarta.validation.Valid
@@ -38,8 +39,12 @@ class RemoveChavePixService(
                 }
                 chavePixRepository.deleteById(chavePix.id!!)
 
-                val bcbRequest = RemoveChavePixBCBRequest(chavePix.chave.valor)
-                bancoCentralPixClient.remove(chavePix.chave.valor, bcbRequest)
+                val request = RemoveChavePixBCBRequest(chavePix.chave.valor)
+                val response = bancoCentralPixClient.remove(chavePix.chave.valor, request)
+
+                if (response.status != HttpStatus.OK) {
+                    throw IllegalStateException("Erro ao remover chave pix do Banco Central")
+                }
 
                 return null
             }

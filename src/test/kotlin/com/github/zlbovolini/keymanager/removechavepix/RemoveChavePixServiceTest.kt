@@ -2,6 +2,7 @@ package com.github.zlbovolini.keymanager.removechavepix
 
 import com.github.zlbovolini.keymanager.comum.*
 import com.github.zlbovolini.keymanager.comum.bancocentral.BancoCentralPixClient
+import com.github.zlbovolini.keymanager.comum.bancocentral.RemoveChavePixBCBRequest
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RemoveChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RemoveChavePixServiceGrpc
@@ -74,7 +75,7 @@ internal class RemoveChavePixServiceTest(
     @Test
     fun `deve remover chave pix cpf`() {
 
-        Mockito.`when`(bancoCentralPixClient.remove(ponteChave.valor))
+        Mockito.`when`(bancoCentralPixClient.remove(ponteChave.valor, RemoveChavePixBCBRequest(ponteChave.valor)))
             .thenReturn(HttpResponse.ok())
 
         pixRepository.save(ponteChavePix)
@@ -87,7 +88,7 @@ internal class RemoveChavePixServiceTest(
         grpcClient.remove(request)
 
         assertFalse(pixRepository.existsByChaveValor(ponteChavePix.chave.valor))
-        verify(bancoCentralPixClient, only()).remove("02467781054")
+        verify(bancoCentralPixClient, only()).remove("02467781054", RemoveChavePixBCBRequest("02467781054"))
     }
 
     @Test
