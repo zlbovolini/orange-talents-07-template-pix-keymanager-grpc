@@ -73,7 +73,7 @@ internal class RegistraChavePixEndpointTest(
                     request.toNovaChave().toModel(dadosContaResponse())
                 )
             )
-        ).thenReturn(HttpResponse.created(mapOf(Pair("chave", "02467781054"))))
+        ).thenReturn(HttpResponse.created(mapOf(Pair("key", "02467781054"))))
 
         val response = grpcClient.registra(request)
 
@@ -117,7 +117,7 @@ internal class RegistraChavePixEndpointTest(
                     request.toNovaChave().toModel(dadosContaResponse())
                 )
             )
-        ).thenReturn(HttpResponse.created(mapOf(Pair("chave", "02467781054"))))
+        ).thenReturn(HttpResponse.created(mapOf(Pair("key", "02467781054"))))
 
         grpcClient.registra(request)
         val error = assertThrows<StatusRuntimeException> {
