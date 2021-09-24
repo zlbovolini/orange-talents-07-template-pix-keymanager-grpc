@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
 import java.util.*
 
 @MicronautTest(transactional = false)
@@ -81,6 +82,11 @@ internal class RegistraChavePixEndpointTest(
             assertNotNull(pixId)
             assertTrue(pixRepository.existsByChaveValor("02467781054"))
         }
+        verify(bancoCentralPixClient).registra(
+            RegistraChavePixBCBRequest.of(
+                request.toNovaChave().toModel(dadosContaResponse())
+            )
+        )
     }
 
     @Test

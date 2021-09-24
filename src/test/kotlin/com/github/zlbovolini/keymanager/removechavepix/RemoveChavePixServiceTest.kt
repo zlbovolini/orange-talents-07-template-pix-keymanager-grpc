@@ -130,6 +130,31 @@ internal class RemoveChavePixServiceTest(
         }
     }
 
+    @Test
+    fun `nao deve remover chave pix quando nao encontrada no banco central`() {
+
+        Mockito.`when`(bancoCentralPixClient.remove(ponteChave.valor, RemoveChavePixBCBRequest(ponteChave.valor)))
+            .thenReturn(HttpResponse.notFound())
+
+        pixRepository.save(ponteChavePix)
+
+        val request = RemoveChavePixRequest.newBuilder()
+            .setChaveId(ponteChavePix.uuid)
+            .setClienteId(ponteClienteId)
+            .build()
+
+        val error = assertThrows<StatusRuntimeException> {
+            grpcClient.remove(request)
+        }
+
+        with(error) {
+            assertEquals(Status.FAILED_PRECONDITION.code, status.code)
+            assertEquals("Erro ao remover chave pix do Banco Central", status.description)
+        }
+        assertTrue(pixRepository.existsByChaveValor(ponteChave.valor))
+        verify(bancoCentralPixClient).remove(ponteChave.valor, RemoveChavePixBCBRequest(ponteChave.valor))
+    }
+
     private fun dadosPonteClienteResponse(): ClienteResponse {
         val instituicaoResponse = InstituicaoResponse("ITAÚ UNIBANCO S.A.", "60701190")
 
