@@ -1,10 +1,10 @@
 package com.github.zlbovolini.keymanager.comum
 
-import com.github.zlbovolini.keymanager.comum.bancocentral.TipoContaBCBRequest
+import com.github.zlbovolini.keymanager.comum.bancocentral.TipoContaBCB
 
 enum class TipoConta(
-    val tipoContaBCBRequest: TipoContaBCBRequest
+    val tipoContaBCB: TipoContaBCB
 ) {
-    CONTA_CORRENTE(TipoContaBCBRequest.CACC),
-    CONTA_POUPANCA(TipoContaBCBRequest.SVGS)
+    CONTA_CORRENTE(TipoContaBCB.CACC),
+    CONTA_POUPANCA(TipoContaBCB.SVGS)
 }

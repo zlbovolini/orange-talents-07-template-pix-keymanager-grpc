@@ -7,32 +7,32 @@ import io.micronaut.core.annotation.Introspected
 @Introspected
 data class RegistraChavePixBCBRequest(
     @JsonProperty("keyType")
-    val tipoChave: TipoChaveBCBRequest,
+    val tipoChave: TipoChaveBCB,
 
     @JsonProperty("key")
     val chave: String,
 
     @JsonProperty("bankAccount")
-    val conta: ContaBCBRequest,
+    val conta: ContaBCB,
 
     @JsonProperty("owner")
-    val dono: TitularChavePixBCBRequest
+    val dono: TitularChavePixBCB
 ) {
     companion object {
         fun of(chavePix: ChavePix): RegistraChavePixBCBRequest {
             return RegistraChavePixBCBRequest(
-                tipoChave = chavePix.chave.tipoChave.tipoChaveBCBRequest,
+                tipoChave = chavePix.chave.tipoChave.tipoChaveBCB,
                 chave = chavePix.chave.valor,
                 conta = with(chavePix.conta) {
-                    ContaBCBRequest(
+                    ContaBCB(
                         agencia = agencia,
                         numero = numero,
-                        tipoConta = tipoConta.tipoContaBCBRequest
+                        tipoConta = tipoConta.tipoContaBCB
                     )
                 },
                 dono = with(chavePix.titular) {
-                    TitularChavePixBCBRequest(
-                        tipoCliente = TipoClienteBCBRequest.NATURAL_PERSON,
+                    TitularChavePixBCB(
+                        tipoCliente = TipoClienteBCB.NATURAL_PERSON,
                         nome = nome,
                         cpf = cpf
                     )

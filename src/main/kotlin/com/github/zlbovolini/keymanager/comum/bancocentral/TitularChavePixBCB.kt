@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import io.micronaut.core.annotation.Introspected
 
 @Introspected
-data class TitularChavePixBCBRequest(
+data class TitularChavePixBCB(
     @JsonProperty("type")
-    val tipoCliente: TipoClienteBCBRequest,
+    val tipoCliente: TipoClienteBCB,
 
     @JsonProperty("name")
     val nome: String,

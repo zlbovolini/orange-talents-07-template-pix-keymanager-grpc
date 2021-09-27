@@ -1,6 +1,8 @@
 package com.github.zlbovolini.keymanager.comum.grpc
 
 import com.github.zlbovolini.keymanager.comum.exception.ChavePixJaExistenteException
+import com.github.zlbovolini.keymanager.comum.exception.ResourceNotFoundException
+import com.github.zlbovolini.keymanager.comum.exception.UnauthorizedAccessException
 import com.google.rpc.BadRequest
 import io.grpc.BindableService
 import io.grpc.Status
@@ -41,6 +43,8 @@ class ExceptionHandlerInterceptor : MethodInterceptor<BindableService, Any?> {
                 is IllegalArgumentException -> Status.INVALID_ARGUMENT.withDescription(e.message).asRuntimeException()
                 is IllegalStateException -> Status.FAILED_PRECONDITION.withDescription(e.message).asRuntimeException()
                 is ChavePixJaExistenteException -> Status.ALREADY_EXISTS.withDescription(e.message).asRuntimeException()
+                is ResourceNotFoundException -> Status.NOT_FOUND.withDescription(e.message).asRuntimeException()
+                is UnauthorizedAccessException -> Status.PERMISSION_DENIED.withDescription(e.message).asRuntimeException()
                 is ConstraintViolationException -> handleConstraintViolationException(e)
                 else -> Status.UNKNOWN.withDescription("erro inesperado").asRuntimeException()
             }

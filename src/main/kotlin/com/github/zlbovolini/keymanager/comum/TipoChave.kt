@@ -1,13 +1,13 @@
 package com.github.zlbovolini.keymanager.comum
 
-import com.github.zlbovolini.keymanager.comum.bancocentral.TipoChaveBCBRequest
+import com.github.zlbovolini.keymanager.comum.bancocentral.TipoChaveBCB
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator
 
 enum class TipoChave(
-    val tipoChaveBCBRequest: TipoChaveBCBRequest
+    val tipoChaveBCB: TipoChaveBCB
 ) {
-    CPF(TipoChaveBCBRequest.CPF) {
+    CPF(TipoChaveBCB.CPF) {
         override fun valida(chave: String?): Boolean {
             if (chave.isNullOrBlank()) {
                 return false
@@ -43,7 +43,7 @@ enum class TipoChave(
             return true
         }
     },
-    CELULAR(TipoChaveBCBRequest.PHONE) {
+    CELULAR(TipoChaveBCB.PHONE) {
         override fun valida(chave: String?): Boolean {
             if (chave.isNullOrBlank()) {
                 return false
@@ -52,7 +52,7 @@ enum class TipoChave(
             return chave.matches("^\\+[1-9][0-9]\\d{1,14}\$".toRegex())
         }
     },
-    EMAIL(TipoChaveBCBRequest.EMAIL) {
+    EMAIL(TipoChaveBCB.EMAIL) {
         override fun valida(chave: String?): Boolean {
             if (chave.isNullOrBlank()) {
                 return false
@@ -64,7 +64,7 @@ enum class TipoChave(
             }
         }
     },
-    ALEATORIA(TipoChaveBCBRequest.RANDOM) {
+    ALEATORIA(TipoChaveBCB.RANDOM) {
         override fun valida(chave: String?) = chave.isNullOrBlank()
     };
 

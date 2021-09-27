@@ -34,13 +34,13 @@ internal class RemoveChavePixServiceTest(
 
     private val ponteClienteId = UUID.randomUUID().toString()
     private val ponteChave = Chave(TipoChave.CPF, "02467781054")
-    private val ponteConta = Conta(TipoConta.CONTA_CORRENTE, "0001", "291900")
+    private val ponteConta = Conta("ITAÚ UNIBANCO S.A.", "60701190", TipoConta.CONTA_CORRENTE, "0001", "291900")
     private val ponteTitular = Titular(ponteClienteId, "Ponte", "02467781054")
     private val ponteChavePix = ChavePix(ponteChave, ponteConta, ponteTitular)
 
     private val yuriClienteId = UUID.randomUUID().toString()
     private val yuriChave = Chave(TipoChave.CPF, "86135457004")
-    private val yuriConta = Conta(TipoConta.CONTA_POUPANCA, "0001", "123455")
+    private val yuriConta = Conta("ITAÚ UNIBANCO S.A.", "60701190", TipoConta.CONTA_POUPANCA, "0001", "123455")
     private val yuriTitular = Titular(yuriClienteId, "Yuri", "86135457004")
     private val yuriChavePix = ChavePix(yuriChave, yuriConta, yuriTitular)
 

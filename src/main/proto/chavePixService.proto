@@ -16,6 +16,10 @@ service RemoveChavePixService {
   rpc remove (RemoveChavePixRequest) returns (google.protobuf.Empty) {}
 }
 
+service ConsultaChavePixService {
+  rpc consulta(ConsultaPorIdOuChaveRequest) returns (DadosChavePixResponse) {}
+}
+
 message RegistraChavePixRequest {
   string clienteId           = 1;
   TipoChaveRequest tipoChave = 2;
@@ -25,16 +29,16 @@ message RegistraChavePixRequest {
 
 enum TipoChaveRequest {
   CHAVE_DESCONHECIDA = 0;
-  CPF = 1;
-  CELULAR = 2;
-  EMAIL = 3;
-  ALEATORIA = 4;
+  CPF                = 1;
+  CELULAR            = 2;
+  EMAIL              = 3;
+  ALEATORIA          = 4;
 }
 
 enum TipoContaRequest {
   CONTA_DESCONHECIDA = 0;
-  CONTA_CORRENTE = 1;
-  CONTA_POUPANCA = 2;
+  CONTA_CORRENTE     = 1;
+  CONTA_POUPANCA     = 2;
 }
 
 message RegistraChavePixResponse {
@@ -42,6 +46,39 @@ message RegistraChavePixResponse {
 }
 
 message RemoveChavePixRequest {
-  string chaveId = 1;
+  string chaveId   = 1;
   string clienteId = 2;
+}
+
+message ConsultaPorIdOuChaveRequest {
+  message PorId {
+    string pixId = 1;
+    string clienteId = 2;
+  }
+
+  oneof filtro {
+    PorId porId  = 1;
+    string chave = 2;
+  }
+}
+
+message DadosChavePixResponse {
+  string chaveId           = 1;
+  string clienteId         = 2;
+  string tipoChave         = 3;
+  string chave             = 4;
+  TitularResponse titular  = 5;
+  DadosContaResponse conta = 6;
+}
+
+message TitularResponse {
+  string nome = 1;
+  string cpf  = 2;
+}
+
+message DadosContaResponse {
+  string instituicao = 1;
+  string agencia     = 2;
+  string numero      = 3;
+  string tipoConta   = 4;
 }

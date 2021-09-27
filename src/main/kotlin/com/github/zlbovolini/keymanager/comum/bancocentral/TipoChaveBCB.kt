@@ -1,6 +1,6 @@
 package com.github.zlbovolini.keymanager.comum.bancocentral
 
-enum class TipoChaveBCBRequest {
+enum class TipoChaveBCB {
     CPF,
     CNPJ,
     PHONE,

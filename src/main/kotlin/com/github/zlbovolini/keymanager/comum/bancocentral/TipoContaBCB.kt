@@ -1,6 +1,6 @@
 package com.github.zlbovolini.keymanager.comum.bancocentral
 
-enum class TipoContaBCBRequest {
+enum class TipoContaBCB {
     CACC, // corrente
     SVGS  // poupança
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import io.micronaut.core.annotation.Introspected
 
 @Introspected
-data class ContaBCBRequest(
+data class ContaBCB(
     @JsonProperty("participant")
     val ispb: String = "60701190",
 
@@ -15,5 +15,5 @@ data class ContaBCBRequest(
     val numero: String,
 
     @JsonProperty("accountType")
-    val tipoConta: TipoContaBCBRequest
+    val tipoConta: TipoContaBCB
 )

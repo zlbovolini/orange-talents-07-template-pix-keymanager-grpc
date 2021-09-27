@@ -25,14 +25,18 @@ data class NovaChavePix(
     val tipoConta: TipoConta
 ) {
     fun toModel(contaResponse: ContaResponse): ChavePix {
-        val chave = Chave(tipoChave, chave)
-        val conta = Conta(
-            tipoConta = tipoConta,
-            agencia = contaResponse.agencia,
-            numero = contaResponse.numero
-        )
-        val titular = contaResponse.titular.toTitular()
+        with(contaResponse) {
+            val chave = Chave(tipoChave, chave)
+            val conta = Conta(
+                instituicao = instituicao.nome,
+                ispb = instituicao.ispb,
+                tipoConta = tipoConta,
+                agencia = agencia,
+                numero = numero
+            )
+            val titular = titular.toTitular()
 
-        return ChavePix(chave, conta, titular)
+            return ChavePix(chave, conta, titular)
+        }
     }
 }

@@ -8,6 +8,12 @@ import javax.validation.constraints.NotNull
 
 @Embeddable
 class Conta(
+    @field:NotBlank
+    val instituicao: String,
+
+    @field:NotBlank
+    val ispb: String,
+
     @field:NotNull
     @Enumerated(EnumType.STRING)
     val tipoConta: TipoConta,
