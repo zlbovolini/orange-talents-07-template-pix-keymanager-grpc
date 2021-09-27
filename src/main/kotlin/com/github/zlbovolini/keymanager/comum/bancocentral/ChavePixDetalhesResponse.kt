@@ -1,6 +1,8 @@
 package com.github.zlbovolini.keymanager.comum.bancocentral
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.github.zlbovolini.keymanager.comum.TipoChave
+import com.github.zlbovolini.keymanager.comum.TipoConta
 import com.github.zlbovolini.keymanager.consultachavepix.ChavePixInfo
 import com.github.zlbovolini.keymanager.consultachavepix.ContaInfo
 import com.github.zlbovolini.keymanager.consultachavepix.TitularInfo
@@ -27,13 +29,22 @@ data class ChavePixDetalhesResponse(
         return ChavePixInfo(
             chaveId = "",
             clienteId = "",
-            tipoChave = tipoChave.name,
+            tipoChave = when (tipoChave) {
+                TipoChaveBCB.CPF -> TipoChave.CPF
+                TipoChaveBCB.PHONE -> TipoChave.CELULAR
+                TipoChaveBCB.EMAIL -> TipoChave.EMAIL
+                TipoChaveBCB.RANDOM -> TipoChave.ALEATORIA
+                else -> throw RuntimeException("Tipo chave não suportada")
+            }.name,
             chave = chave,
             titular = TitularInfo(titular.nome, titular.cpf),
             conta = ContaInfo(
                 instituicao = "",
                 ispb = conta.ispb,
-                tipoConta = conta.tipoConta.name,
+                tipoConta = when (conta.tipoConta) {
+                    TipoContaBCB.CACC -> TipoConta.CONTA_CORRENTE
+                    TipoContaBCB.SVGS -> TipoConta.CONTA_POUPANCA
+                }.name,
                 agencia = conta.agencia,
                 numero = conta.numero
             )
