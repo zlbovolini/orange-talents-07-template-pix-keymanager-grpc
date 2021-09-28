@@ -17,7 +17,6 @@ data class NovaChavePix(
     @field:NotNull
     val tipoChave: TipoChave,
 
-    @field:NotBlank
     @field:Size(max = 77)
     val chave: String,
 
