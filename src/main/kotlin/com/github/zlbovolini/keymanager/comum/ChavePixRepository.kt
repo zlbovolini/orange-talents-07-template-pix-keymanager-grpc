@@ -10,4 +10,6 @@ interface ChavePixRepository : JpaRepository<ChavePix, Long> {
     fun findByUuid(uuid: String): ChavePix?
 
     fun findByChaveValor(chave: String): ChavePix?
+
+    fun findAllByTitularClienteId(clienteId: String): List<ChavePix>
 }

@@ -7,8 +7,8 @@ import com.github.zlbovolini.keymanager.comum.bancocentral.RegistraChavePixBCBRe
 import com.github.zlbovolini.keymanager.comum.itau.*
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixRequest
 import com.github.zlbovolini.keymanager.grpc.RegistraChavePixServiceGrpc
-import com.github.zlbovolini.keymanager.grpc.TipoChaveRequest
-import com.github.zlbovolini.keymanager.grpc.TipoContaRequest
+import com.github.zlbovolini.keymanager.grpc.TipoChaveMessage
+import com.github.zlbovolini.keymanager.grpc.TipoContaMessage
 import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
@@ -53,9 +53,9 @@ internal class RegistraChavePixEndpointTest(
 
         request = RegistraChavePixRequest.newBuilder()
             .setClienteId(clienteId)
-            .setTipoChave(TipoChaveRequest.CPF)
+            .setTipoChave(TipoChaveMessage.CPF)
             .setChave("02467781054")
-            .setTipoConta(TipoContaRequest.CONTA_CORRENTE)
+            .setTipoConta(TipoContaMessage.CONTA_CORRENTE)
             .build()
     }
 

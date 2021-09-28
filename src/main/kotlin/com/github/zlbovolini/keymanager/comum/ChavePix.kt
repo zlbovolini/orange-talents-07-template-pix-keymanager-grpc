@@ -2,6 +2,7 @@ package com.github.zlbovolini.keymanager.comum
 
 import com.github.zlbovolini.keymanager.comum.itau.ContaItau
 import com.github.zlbovolini.keymanager.comum.validacao.Pix
+import java.time.Instant
 import java.util.*
 import javax.persistence.*
 import javax.validation.Valid
@@ -34,6 +35,8 @@ class ChavePix(
     val id: Long? = null
 
     val uuid = UUID.randomUUID().toString()
+
+    val criadoEm = Instant.now()
 
     fun isDono(clienteId: String): Boolean {
         return titular.clienteId.uppercase() == clienteId.uppercase()

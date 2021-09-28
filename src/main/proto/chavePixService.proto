@@ -20,14 +20,18 @@ service ConsultaChavePixService {
   rpc consulta(ConsultaPorIdOuChaveRequest) returns (DadosChavePixResponse) {}
 }
 
-message RegistraChavePixRequest {
-  string clienteId           = 1;
-  TipoChaveRequest tipoChave = 2;
-  string chave               = 3;
-  TipoContaRequest tipoConta = 4;
+service ListaChavePixService {
+  rpc lista(ListaChavesPixRequest) returns (ListaChavesPixResponse) {}
 }
 
-enum TipoChaveRequest {
+message RegistraChavePixRequest {
+  string clienteId           = 1;
+  TipoChaveMessage tipoChave = 2;
+  string chave               = 3;
+  TipoContaMessage tipoConta = 4;
+}
+
+enum TipoChaveMessage {
   CHAVE_DESCONHECIDA = 0;
   CPF                = 1;
   CELULAR            = 2;
@@ -35,7 +39,7 @@ enum TipoChaveRequest {
   ALEATORIA          = 4;
 }
 
-enum TipoContaRequest {
+enum TipoContaMessage {
   CONTA_DESCONHECIDA = 0;
   CONTA_CORRENTE     = 1;
   CONTA_POUPANCA     = 2;
@@ -81,4 +85,21 @@ message DadosContaResponse {
   string agencia     = 2;
   string numero      = 3;
   string tipoConta   = 4;
+}
+
+message ListaChavesPixRequest {
+  string clienteId = 1;
+}
+
+message ListaChavesPixResponse {
+  message ChavePixResponse {
+    string pixId        = 1;
+    string clienteId    = 2;
+    TipoChaveMessage tipoChave = 3;
+    string chave        = 4;
+    TipoContaMessage tipoConta = 5;
+    string criadoEm =     6;
+  }
+
+  repeated ChavePixResponse chaves = 1;
 }
